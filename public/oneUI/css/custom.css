@@ -1,0 +1,248 @@
+#page-container #sidebar {
+  background-color: #fff;
+  box-shadow: 9px 0px 3px -2px rgba(27, 27, 27, 0.03);
+}
+#page-container #sidebar .content-header {
+  padding-left: 0;
+  padding-right: 0;
+}
+#page-container #sidebar .content-header a {
+  padding-left: 1rem;
+}
+#page-container #sidebar .content-header .mini-logo {
+  position: relative;
+}
+#page-container #sidebar .content-header .mini-logo img {
+  position: absolute;
+  width: 40px;
+  left: -10px;
+  top: 10px;
+}
+#page-container #sidebar .content-header .title-brand > p {
+  margin-top: 5px;
+  margin-left: 5px;
+  margin-bottom: 0;
+  line-height: 0.9;
+}
+#page-container #sidebar .js-sidebar-scroll hr {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+#page-header {
+  background-color: #6391b8 !important;
+}
+
+.container-content {
+  padding: 25px;
+}
+
+input::placeholder {
+  font-size: 15px;
+  opacity: 0.5;
+  font-style: italic;
+}
+
+.border-left-cl1 {
+  border-left: 3px solid #6391b8;
+}
+
+.bg1 {
+  background-color: #6391b8 !important;
+}
+
+.bg2 {
+  background-color: #227522 !important;
+}
+
+.bg3 {
+  background-color: #993434 !important;
+}
+
+.bg4 {
+  background-color: #63b878;
+}
+
+.border-bg4 {
+  border: 1px solid #63b878;
+}
+
+.cl1 {
+  color: #6391b8;
+}
+
+.border-left-cl2 {
+  border-left: 3px solid #227522;
+}
+
+.cl2 {
+  color: #227522;
+}
+
+.border-left-cl3 {
+  border-left: 3px solid #993434;
+}
+
+.cl3 {
+  color: #993434;
+}
+
+.cl4 {
+  color: #63b878;
+}
+
+.w-13rem {
+  width: 13rem !important;
+}
+
+.ov-hidden {
+  overflow: hidden;
+}
+
+.card-top {
+  height: 15px;
+  background-color: #6391b8;
+}
+
+.h-25px {
+  height: 25px !important;
+}
+
+.card-top-thin {
+  height: 5px;
+}
+
+.border-white {
+  border: 1px solid white;
+}
+
+.radius-30 {
+  border-radius: 10px;
+}
+
+#modal-block-popout .card {
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+}
+#modal-block-popout .card .card-top {
+  height: 28px;
+}
+#modal-block-popout .card .card-top p {
+  font-size: 20px;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+#modal-block-popout .card .card-body .icon-status {
+  position: absolute;
+  right: -4%;
+  font-size: 14rem;
+  bottom: -24%;
+  opacity: 0.3;
+  z-index: 0;
+}
+
+.spesialis .input-group {
+  display: flex;
+  box-sizing: border-box;
+}
+.spesialis .input-group #select_spesialis {
+  margin-top: 3px;
+}
+
+.overlay {
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 99998;
+}
+
+.lds-ring {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  z-index: 9999999;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+}
+
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid #fff;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #fff transparent transparent transparent;
+}
+
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.drop-content {
+  position: relative;
+  overflow: hidden;
+}
+.drop-content div {
+  border-bottom: 1px solid lightgray;
+  margin-bottom: 10px;
+}
+.drop-content div p {
+  margin-bottom: 10px;
+}
+.drop-content .icon-card {
+  font-size: 68px;
+  position: absolute;
+  top: bottom;
+  bottom: 0.1rem;
+  z-index: 0;
+  opacity: 0.2;
+  right: 0.5rem;
+}
+
+#antrian .card .title {
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 0;
+  text-align: center;
+  font-size: 25px;
+}
+
+#penunjang .content-right .card .card-top p {
+  font-weight: bold;
+  color: white;
+}
+#penunjang .content-right .card .card-top i {
+  color: white;
+}
+#penunjang .content-right .card .card-body .top .btn.active {
+  background-color: #63b878;
+  color: white;
+}
+
+/*# sourceMappingURL=custom.css.map */

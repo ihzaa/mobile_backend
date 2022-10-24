@@ -1,0 +1,675 @@
+openapi: 3.0.3
+info:
+  title: 'Mobile Backend'
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://192.168.118.35:3000'
+paths:
+  /api/home:
+    get:
+      summary: Home
+      description: 'Get data setelah form after login'
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: multipart/form-data
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: x-access-token
+          description: ''
+          example: '{access_token from login API}'
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Token is Invalid'
+                  subcode: 4012
+                properties:
+                  message:
+                    type: string
+                    example: 'Token is Invalid'
+                  subcode:
+                    type: integer
+                    example: 4012
+      tags:
+        - Home
+  /api/home/clock_out:
+    post:
+      summary: 'Clock out'
+      description: 'Clock out absensi'
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: multipart/form-data
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: x-access-token
+          description: ''
+          example: '{access_token from login API}'
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Home
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                jam_kerja:
+                  type: string
+                  description: 'Jam kerja saat melakukan clock out. Must be a valid date in the format <code>H:i:s</code>.'
+                  example: '13:03:02'
+                lokasi_kerja:
+                  type: string
+                  description: 'Lokasi Pekerjaan. Data from : http://192.168.118.35:3000/api/lokasi_kerja. Must be one of <code>1</code>, <code>2</code>, <code>3</code>, or <code>4</code>.'
+                  example: 3
+                latitude:
+                  type: number
+                  description: 'Latitude saat melakukan clock out.'
+                  example: 16342.66191
+                longitude:
+                  type: number
+                  description: 'Longitude saat melakukan clock out.'
+                  example: 26.374013855
+              required:
+                - jam_kerja
+                - lokasi_kerja
+                - latitude
+                - longitude
+  /api/home/clock_in:
+    post:
+      summary: 'Clock in'
+      description: 'Clock in absensi'
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: multipart/form-data
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: x-access-token
+          description: ''
+          example: '{access_token from login API}'
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Home
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                jam_kerja:
+                  type: string
+                  description: 'Jam kerja saat melakukan clock in. Must be a valid date in the format <code>H:i:s</code>.'
+                  example: '13:03:02'
+                lokasi_kerja:
+                  type: string
+                  description: 'Lokasi Pekerjaan. Data from : http://192.168.118.35:3000/api/lokasi_kerja. Must be one of <code>1</code>, <code>2</code>, <code>3</code>, or <code>4</code>.'
+                  example: 3
+                latitude:
+                  type: number
+                  description: 'Latitude saat melakukan clock in.'
+                  example: 37575339.017316
+                longitude:
+                  type: number
+                  description: 'Longitude saat melakukan clock in.'
+                  example: 25627.4
+              required:
+                - jam_kerja
+                - lokasi_kerja
+                - latitude
+                - longitude
+  /api/home/after_login:
+    post:
+      summary: 'Form After Login'
+      description: 'Form setelah user login'
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: multipart/form-data
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: x-access-token
+          description: ''
+          example: '{access_token from login API}'
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Home
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                lokasi_kerja:
+                  type: string
+                  description: 'Lokasi Pekerjaan. Data from : http://192.168.118.35:3000/api/lokasi_kerja. Must be one of <code>1</code>, <code>2</code>, <code>3</code>, or <code>4</code>.'
+                  example: 3
+                surat_tugas:
+                  type: string
+                  format: binary
+                  description: 'File surat tugas. Wajib diisi jika lokasi kerja yang dipilih adalah Lapangan (4). Must be a file. Must not be greater than 512 kilobytes.'
+                suhu:
+                  type: integer
+                  description: 'Suhu tubuh.'
+                  example: 5
+                gejala_harian:
+                  type: array
+                  description: 'Data from : http://192.168.118.35:3000/api/gejala_harian. Must be one of <code>1</code>, <code>2</code>, <code>3</code>, or <code>4</code>.'
+                  example:
+                    - 3
+                  items:
+                    type: string
+              required:
+                - lokasi_kerja
+                - suhu
+                - gejala_harian
+  /api/auth/login:
+    post:
+      summary: 'Login user'
+      description: 'API for logged in a user.'
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: multipart/form-data
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Username dan password match'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'login success'
+                  access_token: xxxxx
+                  refresh_token: yyyyy
+                properties:
+                  message:
+                    type: string
+                    example: 'login success'
+                    description: 'The message of the response API.'
+                  access_token:
+                    type: string
+                    example: xxxxx
+                    description: 'The token that will be used in every request header to authorize the user, the `access_token` only valid for 15 minutes.'
+                  refresh_token:
+                    type: string
+                    example: yyyyy
+                    description: 'The token that will be used for get new `access_token` when expired, the `refresh_token` expired in 1 month.'
+        401:
+          description: 'Username dan password not match'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Username atau password salah!'
+                properties:
+                  message:
+                    type: string
+                    example: 'Username atau password salah!'
+                    description: 'The message of the response API.'
+        500:
+          description: 'Internal server error'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Could not create token.'
+                  error: 'some thing wrong!'
+                properties:
+                  message:
+                    type: string
+                    example: 'Could not create token.'
+                    description: 'The message of the response API.'
+                  error:
+                    type: string
+                    example: 'some thing wrong!'
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  description: 'The username of the user.'
+                  example: minus
+                password:
+                  type: string
+                  description: 'The password of the user.'
+                  example: ipsa
+              required:
+                - username
+                - password
+      security: []
+  /api/auth/refresh:
+    post:
+      summary: 'Refresh Token'
+      description: 'Refresh access token when expired.'
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: multipart/form-data
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'refresh_token valid'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Refresh token success!'
+                  access_token: the_token
+                properties:
+                  message:
+                    type: string
+                    example: 'Refresh token success!'
+                    description: 'The message of the response API.'
+                  access_token:
+                    type: string
+                    example: the_token
+                    description: 'The token that will be used in every request header to authorize the user, the `access_token` only valid for 15 minutes.'
+        401:
+          description: 'Access token is not found `go to login page`'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Authorization Token not found'
+                  subcode: 4011
+                properties:
+                  message:
+                    type: string
+                    example: 'Authorization Token not found'
+                    description: 'The message of the response API.'
+                  subcode:
+                    type: integer
+                    example: 4011
+                    description: 'The subcode of the response HTTP response code.'
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                refresh_token:
+                  type: string
+                  description: 'The `refresh_token` from login API.'
+                  example: laudantium
+              required:
+                - refresh_token
+      security: []
+  /api/auth/logout:
+    delete:
+      summary: 'Logout user'
+      description: 'API for loging out a user.'
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: multipart/form-data
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: x-access-token
+          description: ''
+          example: '{access_token from login API}'
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'header x-access-token valid'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'User successfully signed out'
+                properties:
+                  message:
+                    type: string
+                    example: 'User successfully signed out'
+                    description: 'The message of the response API.'
+        401:
+          description: 'Access token is not found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Authorization Token not found'
+                  subcode: 4011
+                properties:
+                  message:
+                    type: string
+                    example: 'Authorization Token not found'
+                    description: 'The message of the response API.'
+                  subcode:
+                    type: integer
+                    example: 4011
+                    description: 'The subcode of the response HTTP response code.'
+      tags:
+        - Auth
+  /api/auth/check:
+    get:
+      summary: 'Check logged in user'
+      description: 'API for check logged in user.'
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: multipart/form-data
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: x-access-token
+          description: ''
+          example: '{access_token from login API}'
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'header x-access-token valid'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  username: username
+                  name: name
+                  email: email
+                properties:
+                  username:
+                    type: string
+                    example: username
+                  name:
+                    type: string
+                    example: name
+                  email:
+                    type: string
+                    example: email
+        401:
+          description: 'Access token is not found'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Authorization Token not found'
+                  subcode: 4011
+                properties:
+                  message:
+                    type: string
+                    example: 'Authorization Token not found'
+                    description: 'The message of the response API.'
+                  subcode:
+                    type: integer
+                    example: 4011
+                    description: 'The subcode of the response HTTP response code.'
+      tags:
+        - Auth
+  /api/gejala_harian:
+    get:
+      summary: 'Get Gejala Harian'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: multipart/form-data
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: x-access-token
+          description: ''
+          example: '{access_token from login API}'
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Token is Invalid'
+                  subcode: 4012
+                properties:
+                  message:
+                    type: string
+                    example: 'Token is Invalid'
+                  subcode:
+                    type: integer
+                    example: 4012
+      tags:
+        - 'Gejala Harian'
+  /api/lokasi_kerja:
+    get:
+      summary: 'Get Lokasi Kerja'
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: multipart/form-data
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Authorization Token not found'
+                  subcode: 4011
+                properties:
+                  message:
+                    type: string
+                    example: 'Authorization Token not found'
+                  subcode:
+                    type: integer
+                    example: 4011
+      tags:
+        - 'Lokasi Kerja'
+  /api/register:
+    post:
+      summary: 'Register user'
+      description: 'API for register a user.'
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: multipart/form-data
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Registration
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Name of the user.'
+                  example: tempora
+                username:
+                  type: string
+                  description: 'Username of the user, used to login.'
+                  example: culpa
+                email:
+                  type: string
+                  description: 'Email of the user. Must be a valid email address.'
+                  example: garth.fisher@example.net
+                password:
+                  type: string
+                  description: 'Password of the user. Must be at least 8 characters.'
+                  example: 1234passWORD
+                password_confirmation:
+                  type: string
+                  description: 'Confirmation Password of the user. Must be at least 8 characters.'
+                  example: 1234passWORD
+              required:
+                - name
+                - username
+                - email
+                - password
+                - password_confirmation
+      security: []
+tags:
+  -
+    name: Home
+    description: "\nEndpoint halaman home"
+  -
+    name: Auth
+    description: "\nAPIs for auth users"
+  -
+    name: 'Gejala Harian'
+    description: "\nEndpoint gejala harian"
+  -
+    name: 'Lokasi Kerja'
+    description: "\nEndpoint Lokasi Kerja"
+  -
+    name: Registration
+    description: ''

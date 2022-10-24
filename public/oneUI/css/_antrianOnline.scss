@@ -1,0 +1,39 @@
+#antrian{
+   .card{
+       .title{
+           font-weight: bold;
+           margin-top: 0;
+           margin-bottom: 0;
+           text-align: center;
+           font-size: 25px;
+       }
+   }
+}
+
+#penunjang{
+    .content-left{
+
+    }
+
+    .content-right{
+        .card{
+            .card-top{
+                p{
+                    font-weight: bold;
+                    color: white;
+                }
+                i{
+                    color: white;
+                }
+            }
+            .card-body{
+                .top{
+                    .btn.active{
+                        background-color: #63b878;
+                        color: white;
+                    }
+                }
+            }
+        }
+    }
+}

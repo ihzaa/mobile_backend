@@ -1,0 +1,172 @@
+name: Home
+description: |-
+
+  Endpoint halaman home
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/home
+    metadata:
+      title: Home
+      description: 'Get data setelah form after login'
+      authenticated: true
+      custom: []
+    headers:
+      Content-Type: multipart/form-data
+      Accept: application/json
+      x-access-token: '{access_token from login API}'
+    urlParameters: []
+    queryParameters: []
+    bodyParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Token is Invalid","subcode":4012}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '55'
+          access-control-allow-origin: '*'
+        description: null
+    responseFields: []
+  -
+    httpMethods:
+      - POST
+    uri: api/home/clock_out
+    metadata:
+      title: 'Clock out'
+      description: 'Clock out absensi'
+      authenticated: true
+      custom: []
+    headers:
+      Content-Type: multipart/form-data
+      Accept: application/json
+      x-access-token: '{access_token from login API}'
+    urlParameters: []
+    queryParameters: []
+    bodyParameters:
+      jam_kerja:
+        name: jam_kerja
+        description: 'Jam kerja saat melakukan clock out. Must be a valid date in the format <code>H:i:s</code>.'
+        required: true
+        example: '13:03:02'
+        type: string
+        custom: []
+      lokasi_kerja:
+        name: lokasi_kerja
+        description: 'Lokasi Pekerjaan. Data from : http://192.168.118.35:3000/api/lokasi_kerja. Must be one of <code>1</code>, <code>2</code>, <code>3</code>, or <code>4</code>.'
+        required: true
+        example: 3
+        type: string
+        custom: []
+      latitude:
+        name: latitude
+        description: 'Latitude saat melakukan clock out.'
+        required: true
+        example: 16342.66191
+        type: number
+        custom: []
+      longitude:
+        name: longitude
+        description: 'Longitude saat melakukan clock out.'
+        required: true
+        example: 26.374013855
+        type: number
+        custom: []
+    responses: []
+    responseFields: []
+  -
+    httpMethods:
+      - POST
+    uri: api/home/clock_in
+    metadata:
+      title: 'Clock in'
+      description: 'Clock in absensi'
+      authenticated: true
+      custom: []
+    headers:
+      Content-Type: multipart/form-data
+      Accept: application/json
+      x-access-token: '{access_token from login API}'
+    urlParameters: []
+    queryParameters: []
+    bodyParameters:
+      jam_kerja:
+        name: jam_kerja
+        description: 'Jam kerja saat melakukan clock in. Must be a valid date in the format <code>H:i:s</code>.'
+        required: true
+        example: '13:03:02'
+        type: string
+        custom: []
+      lokasi_kerja:
+        name: lokasi_kerja
+        description: 'Lokasi Pekerjaan. Data from : http://192.168.118.35:3000/api/lokasi_kerja. Must be one of <code>1</code>, <code>2</code>, <code>3</code>, or <code>4</code>.'
+        required: true
+        example: 3
+        type: string
+        custom: []
+      latitude:
+        name: latitude
+        description: 'Latitude saat melakukan clock in.'
+        required: true
+        example: 37575339.017316
+        type: number
+        custom: []
+      longitude:
+        name: longitude
+        description: 'Longitude saat melakukan clock in.'
+        required: true
+        example: 25627.4
+        type: number
+        custom: []
+    responses: []
+    responseFields: []
+  -
+    httpMethods:
+      - POST
+    uri: api/home/after_login
+    metadata:
+      title: 'Form After Login'
+      description: 'Form setelah user login'
+      authenticated: true
+      custom: []
+    headers:
+      Content-Type: multipart/form-data
+      Accept: application/json
+      x-access-token: '{access_token from login API}'
+    urlParameters: []
+    queryParameters: []
+    bodyParameters:
+      lokasi_kerja:
+        name: lokasi_kerja
+        description: 'Lokasi Pekerjaan. Data from : http://192.168.118.35:3000/api/lokasi_kerja. Must be one of <code>1</code>, <code>2</code>, <code>3</code>, or <code>4</code>.'
+        required: true
+        example: 3
+        type: string
+        custom: []
+      surat_tugas:
+        name: surat_tugas
+        description: 'File surat tugas. Wajib diisi jika lokasi kerja yang dipilih adalah Lapangan (4). Must be a file. Must not be greater than 512 kilobytes.'
+        required: false
+        example: null
+        type: file
+        custom: []
+      suhu:
+        name: suhu
+        description: 'Suhu tubuh.'
+        required: true
+        example: 5
+        type: integer
+        custom: []
+      gejala_harian:
+        name: gejala_harian
+        description: 'Data from : http://192.168.118.35:3000/api/gejala_harian. Must be one of <code>1</code>, <code>2</code>, <code>3</code>, or <code>4</code>.'
+        required: true
+        example:
+          - 3
+        type: 'string[]'
+        custom: []
+    responses: []
+    responseFields: []

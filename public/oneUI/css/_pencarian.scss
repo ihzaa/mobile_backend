@@ -1,0 +1,26 @@
+#modal-block-popout{
+    .card{
+        margin-bottom: 20px;
+        position: relative;
+        overflow: hidden;
+        .card-top {
+            height: 28px;
+            p{
+                font-size: 20px;
+                color: white;
+                font-weight: bold;
+                margin-bottom: 2px;
+            }
+        }
+        .card-body{
+            .icon-status{
+                position: absolute;
+                right: -4%;
+                font-size: 14rem;
+                bottom: -24%;
+                opacity: 0.3;
+                z-index: 0;
+            }
+        }
+    }
+}

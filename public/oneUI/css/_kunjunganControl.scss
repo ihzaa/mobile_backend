@@ -1,0 +1,20 @@
+.drop-content{
+    position: relative;
+    overflow: hidden;
+    div{
+        border-bottom:1px solid lightgray;
+        margin-bottom: 10px;
+        p{
+            margin-bottom: 10px;
+        }
+    }
+    .icon-card{
+        font-size: 68px;
+        position: absolute;
+        top: bottom;
+        bottom: .1rem;
+        z-index: 0;
+        opacity: 0.2;
+        right: .5rem;
+    }
+}

@@ -1,0 +1,1587 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Mobile Backend Documentation</title>
+
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../docs/css/theme-default.style.css" media="screen">
+    <link rel="stylesheet" href="../docs/css/theme-default.print.css" media="print">
+
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
+
+    <link rel="stylesheet"
+          href="https://unpkg.com/@highlightjs/cdn-assets@10.7.2/styles/obsidian.min.css">
+    <script src="https://unpkg.com/@highlightjs/cdn-assets@10.7.2/highlight.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jets/0.14.1/jets.min.js"></script>
+
+    <style id="language-style">
+        /* starts out as display none and is replaced with js later  */
+                    body .content .javascript-example code { display: none; }
+            </style>
+
+    <script>
+        var baseUrl = "http://192.168.118.35:3000";
+        var useCsrf = Boolean();
+        var csrfUrl = "/sanctum/csrf-cookie";
+    </script>
+    <script src="../docs/js/tryitout-3.33.0.js"></script>
+
+    <script src="../docs/js/theme-default-3.33.0.js"></script>
+
+</head>
+
+<body data-languages="[&quot;javascript&quot;]">
+
+<a href="#" id="nav-button">
+    <span>
+        MENU
+        <img src="../docs/images/navbar.png" alt="navbar-image" />
+    </span>
+</a>
+<div class="tocify-wrapper">
+    
+            <div class="lang-selector">
+                                            <button type="button" class="lang-button" data-language-name="javascript">javascript</button>
+                    </div>
+    
+    <div class="search">
+        <input type="text" class="search" id="input-search" placeholder="Search">
+    </div>
+
+    <div id="toc">
+                                                                            <ul id="tocify-header-0" class="tocify-header">
+                    <li class="tocify-item level-1" data-unique="introduction">
+                        <a href="#introduction">Introduction</a>
+                    </li>
+                                            
+                                                                    </ul>
+                                                <ul id="tocify-header-1" class="tocify-header">
+                    <li class="tocify-item level-1" data-unique="authenticating-requests">
+                        <a href="#authenticating-requests">Authenticating requests</a>
+                    </li>
+                                            
+                                                </ul>
+                    
+                    <ul id="tocify-header-2" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="home">
+                    <a href="#home">Home</a>
+                </li>
+                                    <ul id="tocify-subheader-home" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="home-GETapi-home">
+                        <a href="#home-GETapi-home">Home</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="home-POSTapi-home-clock_out">
+                        <a href="#home-POSTapi-home-clock_out">Clock out</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="home-POSTapi-home-clock_in">
+                        <a href="#home-POSTapi-home-clock_in">Clock in</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="home-POSTapi-home-after_login">
+                        <a href="#home-POSTapi-home-after_login">Form After Login</a>
+                    </li>
+                                                    </ul>
+                            </ul>
+                    <ul id="tocify-header-3" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="auth">
+                    <a href="#auth">Auth</a>
+                </li>
+                                    <ul id="tocify-subheader-auth" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="auth-POSTapi-auth-login">
+                        <a href="#auth-POSTapi-auth-login">Login user</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="auth-POSTapi-auth-refresh">
+                        <a href="#auth-POSTapi-auth-refresh">Refresh Token</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="auth-DELETEapi-auth-logout">
+                        <a href="#auth-DELETEapi-auth-logout">Logout user</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="auth-GETapi-auth-check">
+                        <a href="#auth-GETapi-auth-check">Check logged in user</a>
+                    </li>
+                                                    </ul>
+                            </ul>
+                    <ul id="tocify-header-4" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="gejala-harian">
+                    <a href="#gejala-harian">Gejala Harian</a>
+                </li>
+                                    <ul id="tocify-subheader-gejala-harian" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="gejala-harian-GETapi-gejala_harian">
+                        <a href="#gejala-harian-GETapi-gejala_harian">Get Gejala Harian</a>
+                    </li>
+                                                    </ul>
+                            </ul>
+                    <ul id="tocify-header-5" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="lokasi-kerja">
+                    <a href="#lokasi-kerja">Lokasi Kerja</a>
+                </li>
+                                    <ul id="tocify-subheader-lokasi-kerja" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="lokasi-kerja-GETapi-lokasi_kerja">
+                        <a href="#lokasi-kerja-GETapi-lokasi_kerja">Get Lokasi Kerja</a>
+                    </li>
+                                                    </ul>
+                            </ul>
+                    <ul id="tocify-header-6" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="registration">
+                    <a href="#registration">Registration</a>
+                </li>
+                                    <ul id="tocify-subheader-registration" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="registration-POSTapi-register">
+                        <a href="#registration-POSTapi-register">Register user</a>
+                    </li>
+                                                    </ul>
+                            </ul>
+        
+                        
+            </div>
+
+            <ul class="toc-footer" id="toc-footer">
+                            <li><a href="../docs/collection.json">View Postman collection</a></li>
+                            <li><a href="../docs/openapi.yaml">View OpenAPI spec</a></li>
+                            <li><a href="http://github.com/knuckleswtf/scribe">Documentation powered by Scribe ✍</a></li>
+                    </ul>
+        <ul class="toc-footer" id="last-updated">
+        <li>Last updated: October 24 2022</li>
+    </ul>
+</div>
+
+<div class="page-wrapper">
+    <div class="dark-box"></div>
+    <div class="content">
+        <h1 id="introduction">Introduction</h1>
+<p>This documentation aims to provide all the information you need to work with our API.</p>
+<aside>As you scroll, you'll see code examples for working with the API in different programming languages in the dark area to the right (or as part of the content on mobile).
+You can switch the language used with the tabs at the top right (or from the nav menu at the top left on mobile).</aside>
+<blockquote>
+<p>Base URL</p>
+</blockquote>
+<pre><code class="language-yaml">http://192.168.118.35:3000</code></pre>
+
+        <h1 id="authenticating-requests">Authenticating requests</h1>
+<p>This API is not authenticated.</p>
+
+        <h1 id="home">Home</h1>
+
+    <p>Endpoint halaman home</p>
+
+            <h2 id="home-GETapi-home">Home</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Get data setelah form after login</p>
+
+<span id="example-requests-GETapi-home">
+<blockquote>Example request:</blockquote>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://192.168.118.35:3000/api/home"
+);
+
+const headers = {
+    "Content-Type": "multipart/form-data",
+    "Accept": "application/json",
+    "x-access-token": "{access_token from login API}",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-home">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary>
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 55
+access-control-allow-origin: *
+ </code></pre>
+        </details>         <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Token is Invalid&quot;,
+    &quot;subcode&quot;: 4012
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-home" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-home"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-home"></code></pre>
+</span>
+<span id="execution-error-GETapi-home" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-home"></code></pre>
+</span>
+<form id="form-GETapi-home" data-method="GET"
+      data-path="api/home"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json","x-access-token":"{access_token from login API}"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-home', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-home"
+                    onclick="tryItOut('GETapi-home');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-home"
+                    onclick="cancelTryOut('GETapi-home');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-home" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/home</code></b>
+        </p>
+                <p>
+            <label id="auth-GETapi-home" hidden>x-access-token header:
+                <b><code></code></b><input type="text"
+                                                                name="x-access-token"
+                                                                data-prefix=""
+                                                                data-endpoint="GETapi-home"
+                                                                data-component="header"></label>
+        </p>
+                </form>
+
+            <h2 id="home-POSTapi-home-clock_out">Clock out</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Clock out absensi</p>
+
+<span id="example-requests-POSTapi-home-clock_out">
+<blockquote>Example request:</blockquote>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://192.168.118.35:3000/api/home/clock_out"
+);
+
+const headers = {
+    "Content-Type": "multipart/form-data",
+    "Accept": "application/json",
+    "x-access-token": "{access_token from login API}",
+};
+
+let body = {
+    "jam_kerja": "13:03:02",
+    "lokasi_kerja": 3,
+    "latitude": 16342.66191,
+    "longitude": 26.374013855
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-home-clock_out">
+</span>
+<span id="execution-results-POSTapi-home-clock_out" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-home-clock_out"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-home-clock_out"></code></pre>
+</span>
+<span id="execution-error-POSTapi-home-clock_out" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-home-clock_out"></code></pre>
+</span>
+<form id="form-POSTapi-home-clock_out" data-method="POST"
+      data-path="api/home/clock_out"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json","x-access-token":"{access_token from login API}"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-home-clock_out', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-home-clock_out"
+                    onclick="tryItOut('POSTapi-home-clock_out');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-home-clock_out"
+                    onclick="cancelTryOut('POSTapi-home-clock_out');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-home-clock_out" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/home/clock_out</code></b>
+        </p>
+                <p>
+            <label id="auth-POSTapi-home-clock_out" hidden>x-access-token header:
+                <b><code></code></b><input type="text"
+                                                                name="x-access-token"
+                                                                data-prefix=""
+                                                                data-endpoint="POSTapi-home-clock_out"
+                                                                data-component="header"></label>
+        </p>
+                        <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>jam_kerja</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="jam_kerja"
+               data-endpoint="POSTapi-home-clock_out"
+               value="13:03:02"
+               data-component="body" hidden>
+    <br>
+<p>Jam kerja saat melakukan clock out. Must be a valid date in the format <code>H:i:s</code>.</p>
+        </p>
+                <p>
+            <b><code>lokasi_kerja</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="lokasi_kerja"
+               data-endpoint="POSTapi-home-clock_out"
+               value="3"
+               data-component="body" hidden>
+    <br>
+<p>Lokasi Pekerjaan. Data from : <a href="http://192.168.118.35:3000/api/lokasi_kerja">http://192.168.118.35:3000/api/lokasi_kerja</a>. Must be one of <code>1</code>, <code>2</code>, <code>3</code>, or <code>4</code>.</p>
+        </p>
+                <p>
+            <b><code>latitude</code></b>&nbsp;&nbsp;<small>number</small>  &nbsp;
+                <input type="number"
+               name="latitude"
+               data-endpoint="POSTapi-home-clock_out"
+               value="16342.66191"
+               data-component="body" hidden>
+    <br>
+<p>Latitude saat melakukan clock out.</p>
+        </p>
+                <p>
+            <b><code>longitude</code></b>&nbsp;&nbsp;<small>number</small>  &nbsp;
+                <input type="number"
+               name="longitude"
+               data-endpoint="POSTapi-home-clock_out"
+               value="26.374013855"
+               data-component="body" hidden>
+    <br>
+<p>Longitude saat melakukan clock out.</p>
+        </p>
+        </form>
+
+            <h2 id="home-POSTapi-home-clock_in">Clock in</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Clock in absensi</p>
+
+<span id="example-requests-POSTapi-home-clock_in">
+<blockquote>Example request:</blockquote>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://192.168.118.35:3000/api/home/clock_in"
+);
+
+const headers = {
+    "Content-Type": "multipart/form-data",
+    "Accept": "application/json",
+    "x-access-token": "{access_token from login API}",
+};
+
+let body = {
+    "jam_kerja": "13:03:02",
+    "lokasi_kerja": 3,
+    "latitude": 37575339.017316,
+    "longitude": 25627.4
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-home-clock_in">
+</span>
+<span id="execution-results-POSTapi-home-clock_in" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-home-clock_in"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-home-clock_in"></code></pre>
+</span>
+<span id="execution-error-POSTapi-home-clock_in" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-home-clock_in"></code></pre>
+</span>
+<form id="form-POSTapi-home-clock_in" data-method="POST"
+      data-path="api/home/clock_in"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json","x-access-token":"{access_token from login API}"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-home-clock_in', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-home-clock_in"
+                    onclick="tryItOut('POSTapi-home-clock_in');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-home-clock_in"
+                    onclick="cancelTryOut('POSTapi-home-clock_in');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-home-clock_in" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/home/clock_in</code></b>
+        </p>
+                <p>
+            <label id="auth-POSTapi-home-clock_in" hidden>x-access-token header:
+                <b><code></code></b><input type="text"
+                                                                name="x-access-token"
+                                                                data-prefix=""
+                                                                data-endpoint="POSTapi-home-clock_in"
+                                                                data-component="header"></label>
+        </p>
+                        <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>jam_kerja</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="jam_kerja"
+               data-endpoint="POSTapi-home-clock_in"
+               value="13:03:02"
+               data-component="body" hidden>
+    <br>
+<p>Jam kerja saat melakukan clock in. Must be a valid date in the format <code>H:i:s</code>.</p>
+        </p>
+                <p>
+            <b><code>lokasi_kerja</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="lokasi_kerja"
+               data-endpoint="POSTapi-home-clock_in"
+               value="3"
+               data-component="body" hidden>
+    <br>
+<p>Lokasi Pekerjaan. Data from : <a href="http://192.168.118.35:3000/api/lokasi_kerja">http://192.168.118.35:3000/api/lokasi_kerja</a>. Must be one of <code>1</code>, <code>2</code>, <code>3</code>, or <code>4</code>.</p>
+        </p>
+                <p>
+            <b><code>latitude</code></b>&nbsp;&nbsp;<small>number</small>  &nbsp;
+                <input type="number"
+               name="latitude"
+               data-endpoint="POSTapi-home-clock_in"
+               value="37575339.017316"
+               data-component="body" hidden>
+    <br>
+<p>Latitude saat melakukan clock in.</p>
+        </p>
+                <p>
+            <b><code>longitude</code></b>&nbsp;&nbsp;<small>number</small>  &nbsp;
+                <input type="number"
+               name="longitude"
+               data-endpoint="POSTapi-home-clock_in"
+               value="25627.4"
+               data-component="body" hidden>
+    <br>
+<p>Longitude saat melakukan clock in.</p>
+        </p>
+        </form>
+
+            <h2 id="home-POSTapi-home-after_login">Form After Login</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>Form setelah user login</p>
+
+<span id="example-requests-POSTapi-home-after_login">
+<blockquote>Example request:</blockquote>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://192.168.118.35:3000/api/home/after_login"
+);
+
+const headers = {
+    "Content-Type": "multipart/form-data",
+    "Accept": "application/json",
+    "x-access-token": "{access_token from login API}",
+};
+
+const body = new FormData();
+body.append('lokasi_kerja', '3');
+body.append('suhu', '5');
+body.append('gejala_harian[]', '3');
+body.append('surat_tugas', document.querySelector('input[name="surat_tugas"]').files[0]);
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-home-after_login">
+</span>
+<span id="execution-results-POSTapi-home-after_login" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-home-after_login"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-home-after_login"></code></pre>
+</span>
+<span id="execution-error-POSTapi-home-after_login" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-home-after_login"></code></pre>
+</span>
+<form id="form-POSTapi-home-after_login" data-method="POST"
+      data-path="api/home/after_login"
+      data-authed="1"
+      data-hasfiles="1"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json","x-access-token":"{access_token from login API}"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-home-after_login', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-home-after_login"
+                    onclick="tryItOut('POSTapi-home-after_login');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-home-after_login"
+                    onclick="cancelTryOut('POSTapi-home-after_login');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-home-after_login" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/home/after_login</code></b>
+        </p>
+                <p>
+            <label id="auth-POSTapi-home-after_login" hidden>x-access-token header:
+                <b><code></code></b><input type="text"
+                                                                name="x-access-token"
+                                                                data-prefix=""
+                                                                data-endpoint="POSTapi-home-after_login"
+                                                                data-component="header"></label>
+        </p>
+                        <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>lokasi_kerja</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="lokasi_kerja"
+               data-endpoint="POSTapi-home-after_login"
+               value="3"
+               data-component="body" hidden>
+    <br>
+<p>Lokasi Pekerjaan. Data from : <a href="http://192.168.118.35:3000/api/lokasi_kerja">http://192.168.118.35:3000/api/lokasi_kerja</a>. Must be one of <code>1</code>, <code>2</code>, <code>3</code>, or <code>4</code>.</p>
+        </p>
+                <p>
+            <b><code>surat_tugas</code></b>&nbsp;&nbsp;<small>file</small>     <i>optional</i> &nbsp;
+                <input type="file"
+               name="surat_tugas"
+               data-endpoint="POSTapi-home-after_login"
+               value=""
+               data-component="body" hidden>
+    <br>
+<p>File surat tugas. Wajib diisi jika lokasi kerja yang dipilih adalah Lapangan (4). Must be a file. Must not be greater than 512 kilobytes.</p>
+        </p>
+                <p>
+            <b><code>suhu</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="suhu"
+               data-endpoint="POSTapi-home-after_login"
+               value="5"
+               data-component="body" hidden>
+    <br>
+<p>Suhu tubuh.</p>
+        </p>
+                <p>
+            <b><code>gejala_harian</code></b>&nbsp;&nbsp;<small>string[]</small>  &nbsp;
+                <input type="text"
+               name="gejala_harian[0]"
+               data-endpoint="POSTapi-home-after_login"
+               data-component="body" hidden>
+        <input type="text"
+               name="gejala_harian[1]"
+               data-endpoint="POSTapi-home-after_login"
+               data-component="body" hidden>
+    <br>
+<p>Data from : <a href="http://192.168.118.35:3000/api/gejala_harian">http://192.168.118.35:3000/api/gejala_harian</a>. Must be one of <code>1</code>, <code>2</code>, <code>3</code>, or <code>4</code>.</p>
+        </p>
+        </form>
+
+        <h1 id="auth">Auth</h1>
+
+    <p>APIs for auth users</p>
+
+            <h2 id="auth-POSTapi-auth-login">Login user</h2>
+
+<p>
+</p>
+
+<p>API for logged in a user.</p>
+
+<span id="example-requests-POSTapi-auth-login">
+<blockquote>Example request:</blockquote>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://192.168.118.35:3000/api/auth/login"
+);
+
+const headers = {
+    "Content-Type": "multipart/form-data",
+    "Accept": "application/json",
+};
+
+let body = {
+    "username": "minus",
+    "password": "ipsa"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-auth-login">
+            <blockquote>
+            <p>Example response (200, Username dan password match):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;login success&quot;,
+    &quot;access_token&quot;: &quot;xxxxx&quot;,
+    &quot;refresh_token&quot;: &quot;yyyyy&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Username doesn&#039;t exist):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;User tidak ditemukan!&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Username dan password not match):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Username atau password salah!&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (500, Internal server error):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Could not create token.&quot;,
+    &quot;error&quot;: &quot;some thing wrong!&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-auth-login" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-auth-login"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-auth-login"></code></pre>
+</span>
+<span id="execution-error-POSTapi-auth-login" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-auth-login"></code></pre>
+</span>
+<form id="form-POSTapi-auth-login" data-method="POST"
+      data-path="api/auth/login"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-auth-login', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-auth-login"
+                    onclick="tryItOut('POSTapi-auth-login');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-auth-login"
+                    onclick="cancelTryOut('POSTapi-auth-login');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-auth-login" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/auth/login</code></b>
+        </p>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>username</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="username"
+               data-endpoint="POSTapi-auth-login"
+               value="minus"
+               data-component="body" hidden>
+    <br>
+<p>The username of the user.</p>
+        </p>
+                <p>
+            <b><code>password</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="password"
+               data-endpoint="POSTapi-auth-login"
+               value="ipsa"
+               data-component="body" hidden>
+    <br>
+<p>The password of the user.</p>
+        </p>
+        </form>
+
+    <h3>Response</h3>
+    <h4 class="fancy-heading-panel"><b>Response Fields</b></h4>
+            <p>
+            <b><code>message</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<br>
+<p>The message of the response API.</p>
+        </p>
+            <p>
+            <b><code>access_token</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<br>
+<p>The token that will be used in every request header to authorize the user, the <code>access_token</code> only valid for 15 minutes.</p>
+        </p>
+            <p>
+            <b><code>refresh_token</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<br>
+<p>The token that will be used for get new <code>access_token</code> when expired, the <code>refresh_token</code> expired in 1 month.</p>
+        </p>
+                <h2 id="auth-POSTapi-auth-refresh">Refresh Token</h2>
+
+<p>
+</p>
+
+<p>Refresh access token when expired.</p>
+
+<span id="example-requests-POSTapi-auth-refresh">
+<blockquote>Example request:</blockquote>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://192.168.118.35:3000/api/auth/refresh"
+);
+
+const headers = {
+    "Content-Type": "multipart/form-data",
+    "Accept": "application/json",
+};
+
+let body = {
+    "refresh_token": "laudantium"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-auth-refresh">
+            <blockquote>
+            <p>Example response (200, refresh_token valid):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Refresh token success!&quot;,
+    &quot;access_token&quot;: &quot;the_token&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Access token is invalid `go to login page`):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Token is Invalid&quot;,
+    &quot;subcode&quot;: 4012
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Access token is expired `go to login page`):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Token is Expired&quot;,
+    &quot;subcode&quot;: 4013
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Access token is not found `go to login page`):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Authorization Token not found&quot;,
+    &quot;subcode&quot;: 4011
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-POSTapi-auth-refresh" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-auth-refresh"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-auth-refresh"></code></pre>
+</span>
+<span id="execution-error-POSTapi-auth-refresh" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-auth-refresh"></code></pre>
+</span>
+<form id="form-POSTapi-auth-refresh" data-method="POST"
+      data-path="api/auth/refresh"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-auth-refresh', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-auth-refresh"
+                    onclick="tryItOut('POSTapi-auth-refresh');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-auth-refresh"
+                    onclick="cancelTryOut('POSTapi-auth-refresh');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-auth-refresh" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/auth/refresh</code></b>
+        </p>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>refresh_token</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="refresh_token"
+               data-endpoint="POSTapi-auth-refresh"
+               value="laudantium"
+               data-component="body" hidden>
+    <br>
+<p>The <code>refresh_token</code> from login API.</p>
+        </p>
+        </form>
+
+    <h3>Response</h3>
+    <h4 class="fancy-heading-panel"><b>Response Fields</b></h4>
+            <p>
+            <b><code>message</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<br>
+<p>The message of the response API.</p>
+        </p>
+            <p>
+            <b><code>subcode</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+<br>
+<p>The subcode of the response HTTP response code.</p>
+        </p>
+            <p>
+            <b><code>access_token</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<br>
+<p>The token that will be used in every request header to authorize the user, the <code>access_token</code> only valid for 15 minutes.</p>
+        </p>
+                <h2 id="auth-DELETEapi-auth-logout">Logout user</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>API for loging out a user.</p>
+
+<span id="example-requests-DELETEapi-auth-logout">
+<blockquote>Example request:</blockquote>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://192.168.118.35:3000/api/auth/logout"
+);
+
+const headers = {
+    "Content-Type": "multipart/form-data",
+    "Accept": "application/json",
+    "x-access-token": "{access_token from login API}",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-auth-logout">
+            <blockquote>
+            <p>Example response (200, header x-access-token valid):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;User successfully signed out&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Access token is invalid):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Token is Invalid&quot;,
+    &quot;subcode&quot;: 4012
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Access token is expired):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Token is Expired&quot;,
+    &quot;subcode&quot;: 4013
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Access token is not found):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Authorization Token not found&quot;,
+    &quot;subcode&quot;: 4011
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-DELETEapi-auth-logout" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-auth-logout"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-auth-logout"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-auth-logout" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-auth-logout"></code></pre>
+</span>
+<form id="form-DELETEapi-auth-logout" data-method="DELETE"
+      data-path="api/auth/logout"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json","x-access-token":"{access_token from login API}"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-auth-logout', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-auth-logout"
+                    onclick="tryItOut('DELETEapi-auth-logout');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-auth-logout"
+                    onclick="cancelTryOut('DELETEapi-auth-logout');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-auth-logout" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/auth/logout</code></b>
+        </p>
+                <p>
+            <label id="auth-DELETEapi-auth-logout" hidden>x-access-token header:
+                <b><code></code></b><input type="text"
+                                                                name="x-access-token"
+                                                                data-prefix=""
+                                                                data-endpoint="DELETEapi-auth-logout"
+                                                                data-component="header"></label>
+        </p>
+                </form>
+
+    <h3>Response</h3>
+    <h4 class="fancy-heading-panel"><b>Response Fields</b></h4>
+            <p>
+            <b><code>message</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<br>
+<p>The message of the response API.</p>
+        </p>
+            <p>
+            <b><code>subcode</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+<br>
+<p>The subcode of the response HTTP response code.</p>
+        </p>
+                <h2 id="auth-GETapi-auth-check">Check logged in user</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+<p>API for check logged in user.</p>
+
+<span id="example-requests-GETapi-auth-check">
+<blockquote>Example request:</blockquote>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://192.168.118.35:3000/api/auth/check"
+);
+
+const headers = {
+    "Content-Type": "multipart/form-data",
+    "Accept": "application/json",
+    "x-access-token": "{access_token from login API}",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-auth-check">
+            <blockquote>
+            <p>Example response (200, header x-access-token valid):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;username&quot;: &quot;username&quot;,
+    &quot;name&quot;: &quot;name&quot;,
+    &quot;email&quot;: &quot;email&quot;
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Access token is invalid):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Token is Invalid&quot;,
+    &quot;subcode&quot;: 4012
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Access token is expired):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Token is Expired&quot;,
+    &quot;subcode&quot;: 4013
+}</code>
+ </pre>
+            <blockquote>
+            <p>Example response (401, Access token is not found):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Authorization Token not found&quot;,
+    &quot;subcode&quot;: 4011
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-auth-check" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-auth-check"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-auth-check"></code></pre>
+</span>
+<span id="execution-error-GETapi-auth-check" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-auth-check"></code></pre>
+</span>
+<form id="form-GETapi-auth-check" data-method="GET"
+      data-path="api/auth/check"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json","x-access-token":"{access_token from login API}"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-auth-check', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-auth-check"
+                    onclick="tryItOut('GETapi-auth-check');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-auth-check"
+                    onclick="cancelTryOut('GETapi-auth-check');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-auth-check" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/auth/check</code></b>
+        </p>
+                <p>
+            <label id="auth-GETapi-auth-check" hidden>x-access-token header:
+                <b><code></code></b><input type="text"
+                                                                name="x-access-token"
+                                                                data-prefix=""
+                                                                data-endpoint="GETapi-auth-check"
+                                                                data-component="header"></label>
+        </p>
+                </form>
+
+    <h3>Response</h3>
+    <h4 class="fancy-heading-panel"><b>Response Fields</b></h4>
+            <p>
+            <b><code>message</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<br>
+<p>The message of the response API.</p>
+        </p>
+            <p>
+            <b><code>subcode</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+<br>
+<p>The subcode of the response HTTP response code.</p>
+        </p>
+            <h1 id="gejala-harian">Gejala Harian</h1>
+
+    <p>Endpoint gejala harian</p>
+
+            <h2 id="gejala-harian-GETapi-gejala_harian">Get Gejala Harian</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-gejala_harian">
+<blockquote>Example request:</blockquote>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://192.168.118.35:3000/api/gejala_harian"
+);
+
+const headers = {
+    "Content-Type": "multipart/form-data",
+    "Accept": "application/json",
+    "x-access-token": "{access_token from login API}",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-gejala_harian">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary>
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 56
+access-control-allow-origin: *
+ </code></pre>
+        </details>         <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Token is Invalid&quot;,
+    &quot;subcode&quot;: 4012
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-gejala_harian" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-gejala_harian"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-gejala_harian"></code></pre>
+</span>
+<span id="execution-error-GETapi-gejala_harian" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-gejala_harian"></code></pre>
+</span>
+<form id="form-GETapi-gejala_harian" data-method="GET"
+      data-path="api/gejala_harian"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json","x-access-token":"{access_token from login API}"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-gejala_harian', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-gejala_harian"
+                    onclick="tryItOut('GETapi-gejala_harian');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-gejala_harian"
+                    onclick="cancelTryOut('GETapi-gejala_harian');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-gejala_harian" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/gejala_harian</code></b>
+        </p>
+                <p>
+            <label id="auth-GETapi-gejala_harian" hidden>x-access-token header:
+                <b><code></code></b><input type="text"
+                                                                name="x-access-token"
+                                                                data-prefix=""
+                                                                data-endpoint="GETapi-gejala_harian"
+                                                                data-component="header"></label>
+        </p>
+                </form>
+
+        <h1 id="lokasi-kerja">Lokasi Kerja</h1>
+
+    <p>Endpoint Lokasi Kerja</p>
+
+            <h2 id="lokasi-kerja-GETapi-lokasi_kerja">Get Lokasi Kerja</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-lokasi_kerja">
+<blockquote>Example request:</blockquote>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://192.168.118.35:3000/api/lokasi_kerja"
+);
+
+const headers = {
+    "Content-Type": "multipart/form-data",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-lokasi_kerja">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary>
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 54
+access-control-allow-origin: *
+ </code></pre>
+        </details>         <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Authorization Token not found&quot;,
+    &quot;subcode&quot;: 4011
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-lokasi_kerja" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-lokasi_kerja"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-lokasi_kerja"></code></pre>
+</span>
+<span id="execution-error-GETapi-lokasi_kerja" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-lokasi_kerja"></code></pre>
+</span>
+<form id="form-GETapi-lokasi_kerja" data-method="GET"
+      data-path="api/lokasi_kerja"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-lokasi_kerja', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-lokasi_kerja"
+                    onclick="tryItOut('GETapi-lokasi_kerja');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-lokasi_kerja"
+                    onclick="cancelTryOut('GETapi-lokasi_kerja');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-lokasi_kerja" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/lokasi_kerja</code></b>
+        </p>
+                <p>
+            <label id="auth-GETapi-lokasi_kerja" hidden>x-access-token header:
+                <b><code></code></b><input type="text"
+                                                                name="x-access-token"
+                                                                data-prefix=""
+                                                                data-endpoint="GETapi-lokasi_kerja"
+                                                                data-component="header"></label>
+        </p>
+                </form>
+
+        <h1 id="registration">Registration</h1>
+
+    
+
+            <h2 id="registration-POSTapi-register">Register user</h2>
+
+<p>
+</p>
+
+<p>API for register a user.</p>
+
+<span id="example-requests-POSTapi-register">
+<blockquote>Example request:</blockquote>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://192.168.118.35:3000/api/register"
+);
+
+const headers = {
+    "Content-Type": "multipart/form-data",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "tempora",
+    "username": "culpa",
+    "email": "garth.fisher@example.net",
+    "password": "1234passWORD",
+    "password_confirmation": "1234passWORD"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-register">
+</span>
+<span id="execution-results-POSTapi-register" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-register"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-register"></code></pre>
+</span>
+<span id="execution-error-POSTapi-register" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-register"></code></pre>
+</span>
+<form id="form-POSTapi-register" data-method="POST"
+      data-path="api/register"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-register', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-register"
+                    onclick="tryItOut('POSTapi-register');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-register"
+                    onclick="cancelTryOut('POSTapi-register');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-register" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/register</code></b>
+        </p>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>name</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="name"
+               data-endpoint="POSTapi-register"
+               value="tempora"
+               data-component="body" hidden>
+    <br>
+<p>Name of the user.</p>
+        </p>
+                <p>
+            <b><code>username</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="username"
+               data-endpoint="POSTapi-register"
+               value="culpa"
+               data-component="body" hidden>
+    <br>
+<p>Username of the user, used to login.</p>
+        </p>
+                <p>
+            <b><code>email</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="email"
+               data-endpoint="POSTapi-register"
+               value="garth.fisher@example.net"
+               data-component="body" hidden>
+    <br>
+<p>Email of the user. Must be a valid email address.</p>
+        </p>
+                <p>
+            <b><code>password</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="password"
+               data-endpoint="POSTapi-register"
+               value="1234passWORD"
+               data-component="body" hidden>
+    <br>
+<p>Password of the user. Must be at least 8 characters.</p>
+        </p>
+                <p>
+            <b><code>password_confirmation</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="password_confirmation"
+               data-endpoint="POSTapi-register"
+               value="1234passWORD"
+               data-component="body" hidden>
+    <br>
+<p>Confirmation Password of the user. Must be at least 8 characters.</p>
+        </p>
+        </form>
+
+    
+
+        
+    </div>
+    <div class="dark-box">
+                    <div class="lang-selector">
+                                                        <button type="button" class="lang-button" data-language-name="javascript">javascript</button>
+                            </div>
+            </div>
+</div>
+</body>
+</html>

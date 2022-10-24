@@ -1,0 +1,55 @@
+name: Registration
+description: ''
+endpoints:
+  -
+    httpMethods:
+      - POST
+    uri: api/register
+    metadata:
+      title: 'Register user'
+      description: 'API for register a user.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: multipart/form-data
+      Accept: application/json
+    urlParameters: []
+    queryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'Name of the user.'
+        required: true
+        example: tempora
+        type: string
+        custom: []
+      username:
+        name: username
+        description: 'Username of the user, used to login.'
+        required: true
+        example: culpa
+        type: string
+        custom: []
+      email:
+        name: email
+        description: 'Email of the user. Must be a valid email address.'
+        required: true
+        example: garth.fisher@example.net
+        type: string
+        custom: []
+      password:
+        name: password
+        description: 'Password of the user. Must be at least 8 characters.'
+        required: true
+        example: 1234passWORD
+        type: string
+        custom: []
+      password_confirmation:
+        name: password_confirmation
+        description: 'Confirmation Password of the user. Must be at least 8 characters.'
+        required: true
+        example: 1234passWORD
+        type: string
+        custom: []
+    responses: []
+    responseFields: []

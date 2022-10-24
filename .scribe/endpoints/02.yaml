@@ -1,0 +1,33 @@
+name: 'Gejala Harian'
+description: |-
+
+  Endpoint gejala harian
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/gejala_harian
+    metadata:
+      title: 'Get Gejala Harian'
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Content-Type: multipart/form-data
+      Accept: application/json
+      x-access-token: '{access_token from login API}'
+    urlParameters: []
+    queryParameters: []
+    bodyParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Token is Invalid","subcode":4012}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '56'
+          access-control-allow-origin: '*'
+        description: null
+    responseFields: []

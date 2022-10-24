@@ -1,0 +1,27 @@
+<?php
+
+#To Find Another Routes Files
+// change base path to current folder
+$dir   = base_path('routes/web/admin');
+
+#Scan File To Dir
+$files = scandir($dir);
+$dirs = [];
+foreach ($files as $k => $file) {
+    if (!in_array($file, array('index.php')) && strpos($file, '.php') !== false) {
+        require $dir . '/' . $file;
+    }
+    if (!in_array($file, array('.', '..')) && strpos($file, '.php') === false) {
+        array_push($dirs, $file);
+    }
+};
+
+foreach ($dirs as $k => $d) {
+    $subDir = $dir . '/' . $d;
+    $files = scandir($subDir);
+    foreach ($files as $k => $file) {
+        if (!in_array($file, array('index.php')) && strpos($file, '.php') !== false) {
+            require $subDir . '/' . $file;
+        }
+    };
+};

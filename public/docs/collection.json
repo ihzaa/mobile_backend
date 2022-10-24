@@ -1,0 +1,691 @@
+{
+    "variable": [
+        {
+            "id": "baseUrl",
+            "key": "baseUrl",
+            "type": "string",
+            "name": "string",
+            "value": "http:\/\/192.168.118.35:3000"
+        }
+    ],
+    "info": {
+        "name": "Mobile Backend",
+        "_postman_id": "227a0360-86dd-4fa6-8b73-c90cc2041caf",
+        "description": "",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "Home",
+            "description": "\nEndpoint halaman home",
+            "item": [
+                {
+                    "name": "Home",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/home",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/home"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "multipart\/form-data"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "x-access-token",
+                                "value": "{access_token from login API}"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Get data setelah form after login"
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "x-ratelimit-limit",
+                                    "value": "60"
+                                },
+                                {
+                                    "key": "x-ratelimit-remaining",
+                                    "value": "55"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Token is Invalid\",\"subcode\":4012}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Clock out",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/home\/clock_out",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/home\/clock_out"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "multipart\/form-data"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "x-access-token",
+                                "value": "{access_token from login API}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "jam_kerja",
+                                    "value": "13:03:02",
+                                    "type": "text",
+                                    "description": "Jam kerja saat melakukan clock out. Must be a valid date in the format <code>H:i:s<\/code>."
+                                },
+                                {
+                                    "key": "lokasi_kerja",
+                                    "value": 3,
+                                    "type": "text",
+                                    "description": "Lokasi Pekerjaan. Data from : http:\/\/192.168.118.35:3000\/api\/lokasi_kerja. Must be one of <code>1<\/code>, <code>2<\/code>, <code>3<\/code>, or <code>4<\/code>."
+                                },
+                                {
+                                    "key": "latitude",
+                                    "value": 16342.66191,
+                                    "type": "text",
+                                    "description": "Latitude saat melakukan clock out."
+                                },
+                                {
+                                    "key": "longitude",
+                                    "value": 26.374013855,
+                                    "type": "text",
+                                    "description": "Longitude saat melakukan clock out."
+                                }
+                            ]
+                        },
+                        "description": "Clock out absensi"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Clock in",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/home\/clock_in",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/home\/clock_in"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "multipart\/form-data"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "x-access-token",
+                                "value": "{access_token from login API}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "jam_kerja",
+                                    "value": "13:03:02",
+                                    "type": "text",
+                                    "description": "Jam kerja saat melakukan clock in. Must be a valid date in the format <code>H:i:s<\/code>."
+                                },
+                                {
+                                    "key": "lokasi_kerja",
+                                    "value": 3,
+                                    "type": "text",
+                                    "description": "Lokasi Pekerjaan. Data from : http:\/\/192.168.118.35:3000\/api\/lokasi_kerja. Must be one of <code>1<\/code>, <code>2<\/code>, <code>3<\/code>, or <code>4<\/code>."
+                                },
+                                {
+                                    "key": "latitude",
+                                    "value": 37575339.017316,
+                                    "type": "text",
+                                    "description": "Latitude saat melakukan clock in."
+                                },
+                                {
+                                    "key": "longitude",
+                                    "value": 25627.4,
+                                    "type": "text",
+                                    "description": "Longitude saat melakukan clock in."
+                                }
+                            ]
+                        },
+                        "description": "Clock in absensi"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Form After Login",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/home\/after_login",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/home\/after_login"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "multipart\/form-data"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "x-access-token",
+                                "value": "{access_token from login API}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "lokasi_kerja",
+                                    "value": 3,
+                                    "type": "text",
+                                    "description": "Lokasi Pekerjaan. Data from : http:\/\/192.168.118.35:3000\/api\/lokasi_kerja. Must be one of <code>1<\/code>, <code>2<\/code>, <code>3<\/code>, or <code>4<\/code>."
+                                },
+                                {
+                                    "key": "suhu",
+                                    "value": 5,
+                                    "type": "text",
+                                    "description": "Suhu tubuh."
+                                },
+                                {
+                                    "key": "gejala_harian[0]",
+                                    "value": 3,
+                                    "type": "text",
+                                    "description": ""
+                                },
+                                {
+                                    "key": "surat_tugas",
+                                    "src": [],
+                                    "type": "file"
+                                }
+                            ]
+                        },
+                        "description": "Form setelah user login"
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Auth",
+            "description": "\nAPIs for auth users",
+            "item": [
+                {
+                    "name": "Login user",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/auth\/login",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/auth\/login"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "multipart\/form-data"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "username",
+                                    "value": "minus",
+                                    "type": "text",
+                                    "description": "The username of the user."
+                                },
+                                {
+                                    "key": "password",
+                                    "value": "ipsa",
+                                    "type": "text",
+                                    "description": "The password of the user."
+                                }
+                            ]
+                        },
+                        "description": "API for logged in a user.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"message\":\"login success\",\"access_token\":\"xxxxx\",\"refresh_token\":\"yyyyy\"}",
+                            "name": "Username dan password match"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\"message\":\"User tidak ditemukan!\"}",
+                            "name": "Username doesn't exist"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\"message\":\"Username atau password salah!\"}",
+                            "name": "Username dan password not match"
+                        },
+                        {
+                            "header": [],
+                            "code": 500,
+                            "body": "{\"message\":\"Could not create token.\", \"error\":\"some thing wrong!\"}",
+                            "name": "Internal server error"
+                        }
+                    ]
+                },
+                {
+                    "name": "Refresh Token",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/auth\/refresh",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/auth\/refresh"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "multipart\/form-data"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "refresh_token",
+                                    "value": "laudantium",
+                                    "type": "text",
+                                    "description": "The `refresh_token` from login API."
+                                }
+                            ]
+                        },
+                        "description": "Refresh access token when expired.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"message\":\"Refresh token success!\",\"access_token\":\"the_token\"}",
+                            "name": "refresh_token valid"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\"message\":\"Token is Invalid\",\"subcode\":4012}",
+                            "name": "Access token is invalid `go to login page`"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\"message\":\"Token is Expired\",\"subcode\":4013}",
+                            "name": "Access token is expired `go to login page`"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\"message\":\"Authorization Token not found\",\"subcode\":4011}",
+                            "name": "Access token is not found `go to login page`"
+                        }
+                    ]
+                },
+                {
+                    "name": "Logout user",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/auth\/logout",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/auth\/logout"
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "multipart\/form-data"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "x-access-token",
+                                "value": "{access_token from login API}"
+                            }
+                        ],
+                        "body": null,
+                        "description": "API for loging out a user."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"message\":\"User successfully signed out\"}",
+                            "name": "header x-access-token valid"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\"message\":\"Token is Invalid\",\"subcode\":4012}",
+                            "name": "Access token is invalid"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\"message\":\"Token is Expired\",\"subcode\":4013}",
+                            "name": "Access token is expired"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\"message\":\"Authorization Token not found\",\"subcode\":4011}",
+                            "name": "Access token is not found"
+                        }
+                    ]
+                },
+                {
+                    "name": "Check logged in user",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/auth\/check",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/auth\/check"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "multipart\/form-data"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "x-access-token",
+                                "value": "{access_token from login API}"
+                            }
+                        ],
+                        "body": null,
+                        "description": "API for check logged in user."
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"username\":\"username\",\"name\":\"name\",\"email\":\"email\"}",
+                            "name": "header x-access-token valid"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\"message\":\"Token is Invalid\",\"subcode\":4012}",
+                            "name": "Access token is invalid"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\"message\":\"Token is Expired\",\"subcode\":4013}",
+                            "name": "Access token is expired"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\"message\":\"Authorization Token not found\",\"subcode\":4011}",
+                            "name": "Access token is not found"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Gejala Harian",
+            "description": "\nEndpoint gejala harian",
+            "item": [
+                {
+                    "name": "Get Gejala Harian",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/gejala_harian",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/gejala_harian"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "multipart\/form-data"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "x-access-token",
+                                "value": "{access_token from login API}"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "x-ratelimit-limit",
+                                    "value": "60"
+                                },
+                                {
+                                    "key": "x-ratelimit-remaining",
+                                    "value": "56"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Token is Invalid\",\"subcode\":4012}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Lokasi Kerja",
+            "description": "\nEndpoint Lokasi Kerja",
+            "item": [
+                {
+                    "name": "Get Lokasi Kerja",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/lokasi_kerja",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/lokasi_kerja"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "multipart\/form-data"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "x-ratelimit-limit",
+                                    "value": "60"
+                                },
+                                {
+                                    "key": "x-ratelimit-remaining",
+                                    "value": "54"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Authorization Token not found\",\"subcode\":4011}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Registration",
+            "description": "",
+            "item": [
+                {
+                    "name": "Register user",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/register",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/register"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "multipart\/form-data"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "formdata",
+                            "formdata": [
+                                {
+                                    "key": "name",
+                                    "value": "tempora",
+                                    "type": "text",
+                                    "description": "Name of the user."
+                                },
+                                {
+                                    "key": "username",
+                                    "value": "culpa",
+                                    "type": "text",
+                                    "description": "Username of the user, used to login."
+                                },
+                                {
+                                    "key": "email",
+                                    "value": "garth.fisher@example.net",
+                                    "type": "text",
+                                    "description": "Email of the user. Must be a valid email address."
+                                },
+                                {
+                                    "key": "password",
+                                    "value": "1234passWORD",
+                                    "type": "text",
+                                    "description": "Password of the user. Must be at least 8 characters."
+                                },
+                                {
+                                    "key": "password_confirmation",
+                                    "value": "1234passWORD",
+                                    "type": "text",
+                                    "description": "Confirmation Password of the user. Must be at least 8 characters."
+                                }
+                            ]
+                        },
+                        "description": "API for register a user.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "noauth"
+    }
+}
